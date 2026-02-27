@@ -3,12 +3,15 @@
 return [
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
 
-    // Orígenes permitidos para el SPA (separados por coma)
-    'allowed_origins' => array_filter(array_map('trim', explode(',', env('CORS_ALLOWED_ORIGINS', 'http://localhost:5173')))),
+    'allowed_origins' => array_filter(array_map('trim', explode(',', env('CORS_ALLOWED_ORIGINS', 'http://localhost:5173,http://localhost:5172,http://127.0.0.1:5173,http://127.0.0.1:5172')))),
 
-    'allowed_origins_patterns' => [],
+    // En desarrollo: permitir cualquier puerto de localhost y 127.0.0.1
+    'allowed_origins_patterns' => [
+        '/^http:\/\/localhost(:\d+)?$/',
+        '/^http:\/\/127\.0\.0\.1(:\d+)?$/',
+    ],
 
     'allowed_headers' => ['*'],
 
@@ -16,7 +19,6 @@ return [
 
     'max_age' => 0,
 
-    // Importante para auth por cookies
     'supports_credentials' => true,
 ];
 
