@@ -23,3 +23,7 @@ COPY . .
 
 # Instalamos dependencias
 RUN composer install --no-interaction --prefer-dist
+
+COPY start.sh .
+RUN chmod +x start.sh
+CMD ["sh", "start.sh"]
