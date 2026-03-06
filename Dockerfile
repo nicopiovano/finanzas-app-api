@@ -5,12 +5,10 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libonig-dev \
     libxml2-dev \
-    libpq-dev \
     && docker-php-ext-install \
         zip \
         pdo \
         pdo_mysql \
-        pdo_pgsql \
         mbstring \
         xml
 
@@ -23,7 +21,3 @@ COPY . .
 
 # Instalamos dependencias
 RUN composer install --no-interaction --prefer-dist
-
-COPY start.sh .
-RUN chmod +x start.sh
-CMD ["sh", "start.sh"]
